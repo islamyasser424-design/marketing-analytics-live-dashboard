@@ -4,6 +4,7 @@ import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend, AreaChart, Area 
 } from 'recharts';
 import { TrendingUp, Calendar, ArrowUpRight } from 'lucide-react';
+import { CustomTooltip } from '../CustomTooltip';
 
 interface TrendsViewProps {
   data: MarketingDataset;
@@ -44,13 +45,10 @@ export const TrendsView: React.FC<TrendsViewProps> = ({ data }) => {
                 <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
                 <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                 <YAxis domain={[6, 12]} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
-                <Tooltip 
-                  formatter={(val: any, name: string) => [`${val}%`, name === 'ctr' ? 'CTR' : 'Conversion Rate']}
-                  contentStyle={{ backgroundColor: '#184E77', borderRadius: '12px', border: 'none', color: '#fff', fontSize: '12px' }}
-                />
+                <Tooltip content={<CustomTooltip hint="Monthly rate tracking" />} />
                 <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
-                <Line type="monotone" dataKey="ctr" stroke="#184E77" strokeWidth={2.5} dot={{ r: 3 }} name="CTR %" />
-                <Line type="monotone" dataKey="avg_conversion" stroke="#52B69A" strokeWidth={2.5} dot={{ r: 3 }} name="Conversion %" />
+                <Line type="monotone" dataKey="ctr" stroke="#184E77" strokeWidth={2.5} dot={{ r: 3 }} name="ctr" />
+                <Line type="monotone" dataKey="avg_conversion" stroke="#52B69A" strokeWidth={2.5} dot={{ r: 3 }} name="avg_conversion" />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -77,11 +75,8 @@ export const TrendsView: React.FC<TrendsViewProps> = ({ data }) => {
                 <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
                 <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                 <YAxis domain={['auto', 'auto']} tick={{ fontSize: 11 }} tickFormatter={(v) => `$${(v/1000).toFixed(1)}k`} />
-                <Tooltip 
-                  formatter={(val: any) => [`$${Number(val).toLocaleString()}`, 'Avg CAC']}
-                  contentStyle={{ backgroundColor: '#184E77', borderRadius: '12px', border: 'none', color: '#fff', fontSize: '12px' }}
-                />
-                <Area type="monotone" dataKey="avg_cac" stroke="#1A759F" strokeWidth={2.5} fill="url(#cacGrad)" />
+                <Tooltip content={<CustomTooltip hint="Average customer acquisition cost" />} />
+                <Area type="monotone" dataKey="avg_cac" name="avg_cac" stroke="#1A759F" strokeWidth={2.5} fill="url(#cacGrad)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>

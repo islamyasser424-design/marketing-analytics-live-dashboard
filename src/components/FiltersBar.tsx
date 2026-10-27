@@ -1,6 +1,6 @@
 import React from 'react';
 import { FilterState } from '../types';
-import { Search, Filter, RotateCcw } from 'lucide-react';
+import { Search, RotateCcw, X, MousePointer } from 'lucide-react';
 
 interface FiltersBarProps {
   filters: FilterState;
@@ -117,6 +117,88 @@ export const FiltersBar: React.FC<FiltersBarProps> = ({
         )}
 
       </div>
+
+      {/* Active Filter Badges from Chart Interactivity */}
+      {hasActiveFilters && (
+        <div className="mt-3 pt-3 border-t border-slate-100 dark:border-brand-darkBorder/60 flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1 text-[11px] font-bold text-brand-navy dark:text-brand-lime mr-1">
+            <MousePointer className="w-3.5 h-3.5 text-brand-sea" />
+            <span>Active Filters:</span>
+          </div>
+
+          {filters.channel !== 'all' && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-navy text-white text-xs font-bold shadow-sm">
+              <span>Channel: {filters.channel}</span>
+              <button 
+                onClick={() => setFilters(prev => ({ ...prev, channel: 'all' }))}
+                className="hover:text-brand-lime ml-1"
+                title="Remove filter"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          )}
+
+          {filters.campaignType !== 'all' && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-teal text-white text-xs font-bold shadow-sm">
+              <span>Type: {filters.campaignType}</span>
+              <button 
+                onClick={() => setFilters(prev => ({ ...prev, campaignType: 'all' }))}
+                className="hover:text-brand-lime ml-1"
+                title="Remove filter"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          )}
+
+          {filters.audience !== 'all' && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-sea text-white text-xs font-bold shadow-sm">
+              <span>Audience: {filters.audience}</span>
+              <button 
+                onClick={() => setFilters(prev => ({ ...prev, audience: 'all' }))}
+                className="hover:text-brand-lime ml-1"
+                title="Remove filter"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          )}
+
+          {filters.location !== 'all' && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-blue text-white text-xs font-bold shadow-sm">
+              <span>Location: {filters.location}</span>
+              <button 
+                onClick={() => setFilters(prev => ({ ...prev, location: 'all' }))}
+                className="hover:text-brand-lime ml-1"
+                title="Remove filter"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          )}
+
+          {filters.search.trim() !== '' && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-700 text-white text-xs font-bold shadow-sm">
+              <span>Search: "{filters.search}"</span>
+              <button 
+                onClick={() => setFilters(prev => ({ ...prev, search: '' }))}
+                className="hover:text-brand-lime ml-1"
+                title="Remove filter"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          )}
+
+          <button
+            onClick={resetFilters}
+            className="text-[11px] text-slate-500 hover:text-rose-500 font-semibold underline ml-auto"
+          >
+            Clear all filters
+          </button>
+        </div>
+      )}
     </div>
   );
 };

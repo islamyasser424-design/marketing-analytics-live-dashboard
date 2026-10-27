@@ -95,5 +95,4 @@ export type TabType =
   | 'audiences' 
   | 'geography' 
   | 'trends' 
-  | 'explorer' 
-  | 'dax';
+  | 'explorer';

@@ -7,8 +7,7 @@ import {
   Users, 
   Globe, 
   TrendingUp, 
-  Table, 
-  Terminal 
+  Table 
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -24,7 +23,6 @@ const TABS: { id: TabType; label: string; icon: React.FC<{ className?: string }>
   { id: 'geography', label: 'Geography', icon: Globe },
   { id: 'trends', label: 'Trends', icon: TrendingUp },
   { id: 'explorer', label: 'Explorer', icon: Table },
-  { id: 'dax', label: 'DAX Formulas', icon: Terminal },
 ];
 
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
