@@ -4,4 +4,6 @@ dist/
 .env
 .env.local
 *.sqlite
+*.sqlite-journal
 __pycache__/
+*.pyc
